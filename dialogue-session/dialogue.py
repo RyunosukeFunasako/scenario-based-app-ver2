@@ -9,7 +9,7 @@ def stream_counselor_reply(counselor_reply):
         yield chunk
         time.sleep(0.02)
 
-@st.dialog("CBTの対象")
+@st.dialog("CBTの対象", width="large")
 def cbt_attention_modal():
     st.markdown("""
     対話セッションでは認知行動療法（CBT）を体験していただきます。
@@ -87,7 +87,7 @@ if st.session_state.current_page == "dialogue":
     # 被験者の入力（21ターン目は入力を求めない）
     if st.session_state.speaker == "client":
         with st.form("chat_form", clear_on_submit=True):
-            user_input = st.text_input("あなたの返答を入力してください", key="chat_input")
+            user_input = st.text_area("あなたの返答を入力してください", height=100, placeholder="ShiftまたはShift+Enterで改行できます")
             submitted = st.form_submit_button("送信")
 
         if submitted and user_input:
