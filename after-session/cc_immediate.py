@@ -1,10 +1,19 @@
 import streamlit as st
 import time
 
+@st.dialog("対話履歴", width="large")
+def dialogue_history_modal(dialogue_history):
+    for dialogue in dialogue_history:
+        with st.chat_message(dialogue["role"]):
+            st.markdown(dialogue["content"])
+
 if st.session_state.current_page == "cc_immediate":
     with st.sidebar:
         st.markdown(f"### 実験の進度")
         st.progress(3 / 5)
+        st.markdown(f"### 対話セッション振り返り")
+        if st.button("対話履歴"):
+            dialogue_history_modal(st.session_state.dialogue_history)
 
     # CC-immediateアンケート画面
     st.title("認知の変化の回答")
